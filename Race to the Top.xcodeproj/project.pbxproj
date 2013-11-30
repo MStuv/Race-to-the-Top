@@ -21,6 +21,7 @@
 		C1D21A47184A5A520042343F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D21A29184A5A520042343F /* UIKit.framework */; };
 		C1D21A4F184A5A520042343F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1D21A4D184A5A520042343F /* InfoPlist.strings */; };
 		C1D21A51184A5A520042343F /* Race_to_the_TopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D21A50184A5A520042343F /* Race_to_the_TopTests.m */; };
+		C1D21A5C184A5B090042343F /* RTSpaceShipView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D21A5B184A5B090042343F /* RTSpaceShipView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		C1D21A4C184A5A520042343F /* Race to the TopTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Race to the TopTests-Info.plist"; sourceTree = "<group>"; };
 		C1D21A4E184A5A520042343F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C1D21A50184A5A520042343F /* Race_to_the_TopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Race_to_the_TopTests.m; sourceTree = "<group>"; };
+		C1D21A5A184A5B090042343F /* RTSpaceShipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSpaceShipView.h; sourceTree = "<group>"; };
+		C1D21A5B184A5B090042343F /* RTSpaceShipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSpaceShipView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				C1D21A34184A5A520042343F /* RTAppDelegate.h */,
 				C1D21A35184A5A520042343F /* RTAppDelegate.m */,
 				C1D21A37184A5A520042343F /* Main.storyboard */,
+				C1D21A5A184A5B090042343F /* RTSpaceShipView.h */,
+				C1D21A5B184A5B090042343F /* RTSpaceShipView.m */,
 				C1D21A3A184A5A520042343F /* RTViewController.h */,
 				C1D21A3B184A5A520042343F /* RTViewController.m */,
 				C1D21A3D184A5A520042343F /* Images.xcassets */,
@@ -251,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1D21A36184A5A520042343F /* RTAppDelegate.m in Sources */,
+				C1D21A5C184A5B090042343F /* RTSpaceShipView.m in Sources */,
 				C1D21A3C184A5A520042343F /* RTViewController.m in Sources */,
 				C1D21A32184A5A520042343F /* main.m in Sources */,
 			);
