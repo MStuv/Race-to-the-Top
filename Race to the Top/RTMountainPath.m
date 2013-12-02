@@ -114,4 +114,25 @@
     
     return [variousPaths copy];
 }
+
+/// Class Method that will detect if the user has tapped the Mountain Paths.
+/** 
+    • (UIBezierPath object does not allow for hit testing. The 'CGPathCreateCopyByStrokingPath:' class method will provide an outline of the current UIBezierPath.
+    • This is fairly complicated since this uses quite a bit of C which we have not covered in depth. */
++(UIBezierPath *)tapTargetForPath:(UIBezierPath *)path
+{
+    /// For testing if hit occurred
+    CGPathRef tapTargetPath =
+    /// This is a function that returns a CGPathRef that strokes the inside of our bezierPath.
+    CGPathCreateCopyByStrokingPath(path.CGPath, NULL, fmaxf(10.0f, path.lineWidth), path.lineCapStyle , path.lineJoinStyle, path.miterLimit);
+    
+    /// Create bezierPath instance with value of the CGPath
+    UIBezierPath *tapTarget = [UIBezierPath bezierPathWithCGPath:tapTargetPath];
+    
+    /// Release method of our made path - is not covered under ARC.
+    CGPathRelease(tapTargetPath);
+    
+    /// return the tapTarget bezierPath
+    return tapTarget;
+}
 @end
