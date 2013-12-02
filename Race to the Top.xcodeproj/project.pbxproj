@@ -180,8 +180,8 @@
 		C1D61A56184C308A0063797B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C1D61A57184C3B040063797B /* RTPathView.m */,
 				C1D61A5A184C3B050063797B /* RTPathView.h */,
+				C1D61A57184C3B040063797B /* RTPathView.m */,
 				C1D21A5A184A5B090042343F /* RTSpaceShipView.h */,
 				C1D21A5B184A5B090042343F /* RTSpaceShipView.m */,
 			);
