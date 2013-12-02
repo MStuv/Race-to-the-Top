@@ -24,6 +24,8 @@
 		C1D21A5C184A5B090042343F /* RTSpaceShipView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D21A5B184A5B090042343F /* RTSpaceShipView.m */; };
 		C1D61A4B184C277E0063797B /* Main.iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1D61A4A184C277E0063797B /* Main.iPad.storyboard */; };
 		C1D61A4D184C29A00063797B /* Mount_Fuji_and_Mount_Hoei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C1D61A4C184C29A00063797B /* Mount_Fuji_and_Mount_Hoei.jpg */; };
+		C1D61A5B184C3B050063797B /* RTPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D61A57184C3B040063797B /* RTPathView.m */; };
+		C1D61A5C184C3B050063797B /* RTMountainPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D61A59184C3B050063797B /* RTMountainPath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,10 @@
 		C1D21A5B184A5B090042343F /* RTSpaceShipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSpaceShipView.m; sourceTree = "<group>"; };
 		C1D61A4A184C277E0063797B /* Main.iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.iPad.storyboard; sourceTree = "<group>"; };
 		C1D61A4C184C29A00063797B /* Mount_Fuji_and_Mount_Hoei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Mount_Fuji_and_Mount_Hoei.jpg; sourceTree = "<group>"; };
+		C1D61A57184C3B040063797B /* RTPathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTPathView.m; sourceTree = "<group>"; };
+		C1D61A58184C3B050063797B /* RTMountainPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTMountainPath.h; sourceTree = "<group>"; };
+		C1D61A59184C3B050063797B /* RTMountainPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTMountainPath.m; sourceTree = "<group>"; };
+		C1D61A5A184C3B050063797B /* RTPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTPathView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,12 +125,12 @@
 		C1D21A2B184A5A520042343F /* Race to the Top */ = {
 			isa = PBXGroup;
 			children = (
+				C1D61A5D184C3B150063797B /* Model */,
+				C1D61A56184C308A0063797B /* View */,
 				C1D21A34184A5A520042343F /* RTAppDelegate.h */,
 				C1D21A35184A5A520042343F /* RTAppDelegate.m */,
 				C1D21A37184A5A520042343F /* Main.iPhone.storyboard */,
 				C1D61A4A184C277E0063797B /* Main.iPad.storyboard */,
-				C1D21A5A184A5B090042343F /* RTSpaceShipView.h */,
-				C1D21A5B184A5B090042343F /* RTSpaceShipView.m */,
 				C1D21A3A184A5A520042343F /* RTViewController.h */,
 				C1D21A3B184A5A520042343F /* RTViewController.m */,
 				C1D21A3D184A5A520042343F /* Images.xcassets */,
@@ -169,6 +175,26 @@
 				C1D61A4C184C29A00063797B /* Mount_Fuji_and_Mount_Hoei.jpg */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		C1D61A56184C308A0063797B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C1D61A57184C3B040063797B /* RTPathView.m */,
+				C1D61A5A184C3B050063797B /* RTPathView.h */,
+				C1D21A5A184A5B090042343F /* RTSpaceShipView.h */,
+				C1D21A5B184A5B090042343F /* RTSpaceShipView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C1D61A5D184C3B150063797B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C1D61A58184C3B050063797B /* RTMountainPath.h */,
+				C1D61A59184C3B050063797B /* RTMountainPath.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,10 +297,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1D61A5B184C3B050063797B /* RTPathView.m in Sources */,
 				C1D21A36184A5A520042343F /* RTAppDelegate.m in Sources */,
 				C1D21A5C184A5B090042343F /* RTSpaceShipView.m in Sources */,
 				C1D21A3C184A5A520042343F /* RTViewController.m in Sources */,
 				C1D21A32184A5A520042343F /* main.m in Sources */,
+				C1D61A5C184C3B050063797B /* RTMountainPath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
