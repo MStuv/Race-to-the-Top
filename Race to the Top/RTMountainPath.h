@@ -10,10 +10,8 @@
 
 @interface RTMountainPath : NSObject
 
-/// Create Class Method
+// Class Methods - called on the class: [RTMountainPath mountainPathsForRect:CGRect object];
 +(NSArray *)mountainPathsForRect: (CGRect)rect;
-
-///
 +(UIBezierPath *)tapTargetForPath:(UIBezierPath *)path;
 
 
