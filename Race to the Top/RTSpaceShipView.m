@@ -26,7 +26,7 @@
 {
     // Drawing code
     
-    /// Drawing a Space Ship
+    // Drawing a Space Ship
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     bezierPath.lineWidth = 2.0;
     

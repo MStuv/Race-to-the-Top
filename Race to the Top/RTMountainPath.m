@@ -13,13 +13,13 @@
 @implementation RTMountainPath
 
 
-/// Class method that returns an Array
+// Class method that returns an Array
 + (NSArray *)mountainPathsForRect:(CGRect)rect
 
 {
     NSMutableArray *variousPaths = [@[] mutableCopy];
     
-    /// CGPoints for First Path
+    // CGPoints for First Path
     CGPoint firstPoint = CGPointMake(rect.size.width * (1/6.0), CGRectGetMaxY(rect));
     
     CGPoint secondPoint = CGPointMake(rect.size.width * (1/3.0), rect.size.height * (5/6.0));
@@ -38,11 +38,11 @@
     
     CGPoint ninthPoint = CGPointMake(rect.size.width * (11/20.0), rect.size.height * (5/24.0));
     
-    /// control point is used when adding a curved path
+    // control point is used when adding a curved path
     CGPoint controlPoint = CGPointMake(rect.size.width * (6 / 8.0), rect.size.height * (1/ 3.0));
     
     
-    /// CGPoints for Second Path
+    // CGPoints for Second Path
     CGPoint firstPointForSecondPath = CGPointMake(rect.size.width * (1/6.0) - PATH_WIDTH, CGRectGetMaxY(rect));
     
     CGPoint secondPointForSecondPath = CGPointMake(rect.size.width * (1/3.0), rect.size.height * (5/6.0) - PATH_WIDTH);
@@ -108,31 +108,31 @@
     
     [leftMountainPath addQuadCurveToPoint:ninthPointForSecondPath controlPoint:controlPointForSecondpath];
     
-    /// Added UIBezierPath objects to the arrays
+    // Added UIBezierPath objects to the arrays
     [variousPaths addObject:rightMountainPath];
     [variousPaths addObject:leftMountainPath];
     
     return [variousPaths copy];
 }
 
-/// Class Method that will detect if the user has tapped the Mountain Paths.
-/** 
+// Class Method that will detect if the user has tapped the Mountain Paths.
+/*
     • (UIBezierPath object does not allow for hit testing. The 'CGPathCreateCopyByStrokingPath:' class method will provide an outline of the current UIBezierPath.
     • This is fairly complicated since this uses quite a bit of C which we have not covered in depth. */
 +(UIBezierPath *)tapTargetForPath:(UIBezierPath *)path
 {
-    /// For testing if hit occurred
+    // For testing if hit occurred
     CGPathRef tapTargetPath =
-    /// This is a function that returns a CGPathRef that strokes the inside of our bezierPath.
+    // This is a function that returns a CGPathRef that strokes the inside of our bezierPath.
     CGPathCreateCopyByStrokingPath(path.CGPath, NULL, fmaxf(10.0f, path.lineWidth), path.lineCapStyle , path.lineJoinStyle, path.miterLimit);
     
-    /// Create bezierPath instance with value of the CGPath
+    // Create bezierPath instance with value of the CGPath
     UIBezierPath *tapTarget = [UIBezierPath bezierPathWithCGPath:tapTargetPath];
     
-    /// Release method of our made path - is not covered under ARC.
+    // Release method of our made path - is not covered under ARC.
     CGPathRelease(tapTargetPath);
     
-    /// return the tapTarget bezierPath
+    // return the tapTarget bezierPath
     return tapTarget;
 }
 @end
