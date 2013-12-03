@@ -11,6 +11,12 @@
 #import "RTPathView.h"
 #import "RTMountainPath.h"
 
+/// Defines for making easy changes if needed
+#define RTMAP_STARTING_SCORE 15000
+#define RTMAP_SCORE_DECREMENT_AMOUNT 100
+#define RTTIMER_INTERVAL 0.1
+#define RTWALL_PENALTY 500
+
 @interface RTViewController ()
 
 #pragma mark - Private Properties
@@ -57,7 +63,7 @@
     /// set the value of the NSTimer property.
     self.timer = [NSTimer
                   /// 1 second intervals
-                  scheduledTimerWithTimeInterval:1.0
+                  scheduledTimerWithTimeInterval:RTTIMER_INTERVAL
                   /// target is the currentVC
                   target:self
                   /// set selector to the action method: 'timerFired'
@@ -65,6 +71,9 @@
                   userInfo:nil
                   /// have timer continue to repeat
                   repeats:YES];
+    
+    /// Setting starting score
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i", RTMAP_STARTING_SCORE];
 }
 
 
@@ -107,17 +116,39 @@
         
         // If the tapTarget contains the point that are in the fingerLocation (user's finger location)
         if ([tapTarget containsPoint:fingerLocation]) {
-            // log that the user hit the wall.
-            NSLog(@"You Hit the wall");
+        
+            /// If user touches wall of path, the following method will be called to update score with a penalty
+            [self decrementScoreByAmount:RTWALL_PENALTY];
         }
     }
 }
 
 
-#pragma mark - NSTimer Action Method
+#pragma mark - Timer Action Method
+
+/// Timer Action Method for
 -(void)timerFired
 {
-    NSLog(@"Fired");
+    /// Everytime the timerFired method is called, call the decrementScoreByAmount: method to update the score
+    [self decrementScoreByAmount:RTMAP_SCORE_DECREMENT_AMOUNT];
+}
+
+#pragma mark - Score Method
+
+-(void)decrementScoreByAmount:(int)amount
+{
+    /// NSString Instance that is set the lastObject of the score string
+        /** componentsSeparatedByString: method will seperate the string into objects based by the string that is passed into the method. For example, the following seperates the string into components based on @" " spaces between words. */
+    NSString *scoreText = [[self.scoreLabel.text componentsSeparatedByString:@" "] lastObject];
+    
+    /// The lastObject of the previous line of code is the current score. Need to convert the string version of the score into an int so that it can be calculated.
+    int score = [scoreText intValue];
+    
+    /// subtract the amount (which was passed when the method was called) from the score.
+    score = score - amount;
+    
+    /// set the scoreLabel to reflect the current score. Converting it to a string using stringWithFormat
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i", score];
 }
 
 @end
