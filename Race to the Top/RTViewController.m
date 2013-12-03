@@ -11,7 +11,7 @@
 #import "RTPathView.h"
 #import "RTMountainPath.h"
 
-/// Defines for making easy changes if needed
+// Defines for making easy changes if needed
 #define RTMAP_STARTING_SCORE 15000
 #define RTMAP_SCORE_DECREMENT_AMOUNT 100
 #define RTTIMER_INTERVAL 0.1
@@ -24,7 +24,7 @@
 //Private IBOutlet from Storyboard view connected to RTPathView
 @property (strong, nonatomic) IBOutlet RTPathView *pathView;
 
-/// Private NSTimer property
+// Private NSTimer property
 @property (strong, nonatomic) NSTimer *timer;
 
 
@@ -57,23 +57,6 @@
 
     // Add panRecognizer to the pathView IBOutlet
     [self.pathView addGestureRecognizer:panRecognizer];
- 
-
-#pragma mark TIMER - NSTimer Instance
-    /// set the value of the NSTimer property.
-    self.timer = [NSTimer
-                  /// 1 second intervals
-                  scheduledTimerWithTimeInterval:RTTIMER_INTERVAL
-                  /// target is the currentVC
-                  target:self
-                  /// set selector to the action method: 'timerFired'
-                  selector:@selector(timerFired)
-                  userInfo:nil
-                  /// have timer continue to repeat
-                  repeats:YES];
-    
-    /// Setting starting score
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i", RTMAP_STARTING_SCORE];
 }
 
 
@@ -106,29 +89,61 @@
     // Using the method locationInView to determine where in the coordinate system the touch is occuring
     // Location of the user's current finger location on the pathView
     CGPoint fingerLocation = [panRecognizer locationInView:self.pathView];
-    NSLog(@"I'm at (%f, %f)", fingerLocation.x, fingerLocation.y);
     
-    // To get all the path objects in the array that is returned from the RTMountainPath's 'mountainPathsForRect:' method.
-    for (UIBezierPath *path in [RTMountainPath mountainPathsForRect:self.pathView.bounds]) {
-        
-        // once we have a usable bezierPath, we create an instance of UIBezierPath that is given the value that is returned from the RTMountainPath's 'tapTargetForPath:' method
-        UIBezierPath *tapTarget = [RTMountainPath tapTargetForPath:path];
-        
-        // If the tapTarget contains the point that are in the fingerLocation (user's finger location)
-        if ([tapTarget containsPoint:fingerLocation]) {
-        
-        /// If user touches wall of path, the following method will be called to update score with a penalty
-            [self decrementScoreByAmount:RTWALL_PENALTY];
+    /// if the pan state is began and the fingerlocation is at the start of the trail
+    if (panRecognizer.state == UIGestureRecognizerStateBegan && fingerLocation.y < 750)
+    {
+        // set the value of the NSTimer property.
+        self.timer = [NSTimer
+                      // 1 second intervals
+                      scheduledTimerWithTimeInterval:RTTIMER_INTERVAL
+                      // target is the currentVC
+                      target:self
+                      // set selector to the action method: 'timerFired'
+                      selector:@selector(timerFired)
+                      userInfo:nil
+                      // have timer continue to repeat
+                      repeats:YES];
+        // Setting starting score
+        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i", RTMAP_STARTING_SCORE];
+    }
+    else if (panRecognizer.state == UIGestureRecognizerStateChanged)
+    {
+        // To get all the path objects in the array that is returned from the RTMountainPath's 'mountainPathsForRect:' method.
+        for (UIBezierPath *path in [RTMountainPath mountainPathsForRect:self.pathView.bounds]) {
+            
+            // once we have a usable bezierPath, we create an instance of UIBezierPath that is given the value that is returned from the RTMountainPath's 'tapTargetForPath:' method
+            UIBezierPath *tapTarget = [RTMountainPath tapTargetForPath:path];
+            
+            // If the tapTarget contains the point that are in the fingerLocation (user's finger location)
+            if ([tapTarget containsPoint:fingerLocation]) {
+                
+                // If user touches wall of path, the following method will be called to update score with a penalty
+                [self decrementScoreByAmount:RTWALL_PENALTY];
+            }
         }
     }
+    else if (panRecognizer.state ==UIGestureRecognizerStateEnded && fingerLocation.y <= 165)
+    {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Make sure to start at the bottom of the path, hold your finger down and finish at the top of the path!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    
 }
 
 #pragma mark - Timer Action Method
 
-/// Timer Action Method for
+// Timer Action Method for
 -(void)timerFired
 {
-    /// Everytime the timerFired method is called, call the decrementScoreByAmount: method to update the score
+    // Everytime the timerFired method is called, call the decrementScoreByAmount: method to update the score
     [self decrementScoreByAmount:RTMAP_SCORE_DECREMENT_AMOUNT];
 }
 
@@ -136,17 +151,17 @@
 
 -(void)decrementScoreByAmount:(int)amount
 {
-    /// NSString Instance that is set the lastObject of the score string
-        /** componentsSeparatedByString: method will seperate the string into objects based by the string that is passed into the method. For example, the following seperates the string into components based on @" " spaces between words. */
+    // NSString Instance that is set the lastObject of the score string
+        /* componentsSeparatedByString: method will seperate the string into objects based by the string that is passed into the method. For example, the following seperates the string into components based on @" " spaces between words. */
     NSString *scoreText = [[self.scoreLabel.text componentsSeparatedByString:@" "] lastObject];
     
-    /// The lastObject of the previous line of code is the current score. Need to convert the string version of the score into an int so that it can be calculated.
+    // The lastObject of the previous line of code is the current score. Need to convert the string version of the score into an int so that it can be calculated.
     int score = [scoreText intValue];
     
-    /// subtract the amount (which was passed when the method was called) from the score.
+    // subtract the amount (which was passed when the method was called) from the score.
     score = score - amount;
     
-    /// set the scoreLabel to reflect the current score. Converting it to a string using stringWithFormat
+    // set the scoreLabel to reflect the current score. Converting it to a string using stringWithFormat
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %i", score];
 }
 
