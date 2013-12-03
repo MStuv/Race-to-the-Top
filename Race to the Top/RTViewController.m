@@ -24,7 +24,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
-#pragma mark TAP GESTURE
+#pragma mark TAP - GestureRecognizer
     /// Create instance of TapGestureRecognizer
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
                                              /// set currentVC as the target
@@ -38,13 +38,14 @@
     /// Method to add the tapRecongnizer to the pathView IBOutlet
     [self.pathView addGestureRecognizer:tapRecognizer];
 
-#pragma mark PAN GESTURE
+#pragma mark PAN - GestureRecognizer
     /// Create instance of PanGestureRecognizer
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panDetected:)];
     
     /// Add panRecognizer to the pathView IBOutlet
     [self.pathView addGestureRecognizer:panRecognizer];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -76,6 +77,19 @@
     /// Location of the user's current finger location on the pathView
     CGPoint fingerLocation = [panRecognizer locationInView:self.pathView];
     NSLog(@"I'm at (%f, %f)", fingerLocation.x, fingerLocation.y);
+    
+    /// To get all the path objects in the array that is returned from the RTMountainPath's 'mountainPathsForRect:' method.
+    for (UIBezierPath *path in [RTMountainPath mountainPathsForRect:self.pathView.bounds]) {
+        
+        /// once we have a usable bezierPath, we create an instance of UIBezierPath that is given the value that is returned from the RTMountainPath's 'tapTargetForPath:' method
+        UIBezierPath *tapTarget = [RTMountainPath tapTargetForPath:path];
+        
+        /// If the tapTarget contains the point that are in the fingerLocation (user's finger location)
+        if ([tapTarget containsPoint:fingerLocation]) {
+            /// log that the user hit the wall.
+            NSLog(@"You Hit the wall");
+        }
+    }
 }
 
 
