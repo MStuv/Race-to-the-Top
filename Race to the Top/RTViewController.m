@@ -17,8 +17,11 @@
 // Private Properties - Not available to other classes to access
 //Private IBOutlet from Storyboard view connected to RTPathView
 @property (strong, nonatomic) IBOutlet RTPathView *pathView;
+
 /// Private NSTimer property
 @property (strong, nonatomic) NSTimer *timer;
+
+
 @end
 
 @implementation RTViewController
