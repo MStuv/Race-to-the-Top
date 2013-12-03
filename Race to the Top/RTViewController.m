@@ -117,12 +117,11 @@
         // If the tapTarget contains the point that are in the fingerLocation (user's finger location)
         if ([tapTarget containsPoint:fingerLocation]) {
         
-            /// If user touches wall of path, the following method will be called to update score with a penalty
+        /// If user touches wall of path, the following method will be called to update score with a penalty
             [self decrementScoreByAmount:RTWALL_PENALTY];
         }
     }
 }
-
 
 #pragma mark - Timer Action Method
 
@@ -133,7 +132,7 @@
     [self decrementScoreByAmount:RTMAP_SCORE_DECREMENT_AMOUNT];
 }
 
-#pragma mark - Score Method
+#pragma mark - Changing Score Method
 
 -(void)decrementScoreByAmount:(int)amount
 {
